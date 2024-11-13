@@ -2,7 +2,6 @@
 ### lets just write the script without worrying about the running the code. We don't have all the modules installed.
 
 import streamlit as st
-
 import pandas as pd
 import random
 
@@ -24,23 +23,24 @@ bedrooms = st.sidebar.number_input("Number of Bedrooms", min_value=1, max_value=
 bathrooms = st.sidebar.number_input("Number of Bathrooms", min_value=1, max_value=10, value=1)
 beds = st.sidebar.number_input("Number of Beds", min_value=1, max_value=10, value=1)
 
-# Submit Button
-if st.sidebar.button("Submit Property"):
+# Flag to check if the submit button has been clicked
+submitted = st.sidebar.button("Submit Property")
+
+# Main Page Content
+if not submitted:
+    # Display introductory text only if not submitted
+    st.title("Seller's Property Submission")
+    st.write("Fill in the property details on the sidebar to submit your listing.")
+else:
     # Display submitted property details
-    st.write("Property Details Submitted:")
-    st.write(f"Property Type: {property_type}")
-    st.write(f"Price Range: {price_range}")
-    st.write(f"Bedrooms: {bedrooms}")
-    st.write(f"Bathrooms: {bathrooms}")
-    st.write(f"Beds: {beds}")
+    st.markdown("### Property Details Submitted")
+    st.write(f"**Property Type:** {property_type}")
+    st.write(f"**Price Range:** {price_range}")
+    st.write(f"**Bedrooms:** {bedrooms}")
+    st.write(f"**Bathrooms:** {bathrooms}")
+    st.write(f"**Beds:** {beds}")
     
-    # Generate and display a random number between 1 and 5
-    random_number = random.randint(1, 5)
-    st.write(f"Predicted Rating for your listing: {random_number}")
-
-# Display seller input summary on the main page
-st.title("Seller's Property Submission")
-st.write("Fill in the property details on the sidebar to submit your listing.")
-
-
+    # Generate and display a prominent random score
+    random_score = random.randint(1, 5)
+    st.markdown(f"## 🔥 **Predicted Score: {random_score}** 🔥")
 
